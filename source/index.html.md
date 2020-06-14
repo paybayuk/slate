@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: Slydo API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -14,12 +14,12 @@ toc_footers:
 includes:
   - errors
 
-search: true
+search: false
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Slydo API! You can use our API to access Slydo API endpoints, which can get information on various cats, kittens, and breeds in our database.
 
 We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
@@ -65,9 +65,9 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-# Kittens
+# Transactions
 
-## Get All Kittens
+## Get All Transactions
 
 ```ruby
 require 'kittn'
@@ -77,14 +77,16 @@ api.kittens.get
 ```
 
 ```python
-import kittn
+import requests
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+headers = {}
+url = "http://slydo.co/api/v1/transactions/"
+response = requests.get(url=url, headers=headers)
+response.json()
 ```
 
 ```shell
-curl "http://example.com/api/kittens"
+curl "http://slydo.co/api/v1/transactions/"
   -H "Authorization: meowmeowmeow"
 ```
 
@@ -133,7 +135,7 @@ available | true | If set to false, the result will include kittens that have al
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-## Get a Specific Kitten
+## Get a Specific Transaction
 
 ```ruby
 require 'kittn'
@@ -187,7 +189,7 @@ Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to retrieve
 
-## Delete a Specific Kitten
+## Delete a Specific Transaction
 
 ```ruby
 require 'kittn'
