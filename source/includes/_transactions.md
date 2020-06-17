@@ -1,14 +1,16 @@
-<aside class="notice">
-You must replace <code>$access_token</code> with your personal API key.
-</aside>
-
 # Transactions
 
+Transactions are movements of funds into or out of an account.
+
+Most properties on transactions are self-explanatory. We'll eventually get around to documenting them all, but in the 
+meantime let's discuss the most interesting/confusing ones:
+
+<aside class="warning"><strong>Security Warning</strong><br>
+Please note that an insecurely stored API Key will result in abuse of the transaction endpoints.
+</aside>
+
+
 ## Make Payment
-
-Transactions are movements of funds into or out of an account. Negative transactions represent debits (ie. *spending* money) and positive transactions represent credits (ie. *receiving* money).
-
-Most properties on transactions are self-explanatory. We'll eventually get around to documenting them all, but in the meantime let's discuss the most interesting/confusing ones:
 
 ```shell
 $ http POST "https://developer.slydo.co/api/v1/transactions/create/" \
@@ -35,35 +37,31 @@ $ http POST "https://developer.slydo.co/api/v1/transactions/create/" \
   }
 ```
 
-This endpoint retrieves all kittens.
+This endpoint creates a single transaction(ie: send payment to another user).
 
 ### HTTP Request
 
-`GET https://developer.slydo.co/api/v1/transactions/`
+`POST https://developer.slydo.co/api/v1/transactions/create/`
 
 ### Query Parameters
 
-Parameter | Required | Description
---------- | ------- | -------------
-amount | true | If set to true, the result will also include cats.
-currency | true | If set to true, the result will also include cats.
-description | true | If set to true, the result will also include cats.
-short description | true | If set to true, the result will also include cats.
-note | true | If set to true, the result will also include cats.
-category | true | If set to true, the result will also include cats.
+Parameter | Required | Type | Description
+--------- | ------- | ------- | -------------
+amount | true | int |If set to true, the result will also include cats.
+currency | true | string | If set to true, the result will also include cats.
+description | true | string | If set to true, the result will also include cats.
+short description | true |string | If set to true, the result will also include cats.
+note | true | string | If set to true, the result will also include cats.
+category | true | string | If set to true, the result will also include cats.
+to_customer | true | string | The username of the user to send the money to.
 
-
-
-
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
 
 ## List transactions
 
+Returns a list of transactions.
+
 ```shell
-curl "https://developer.slydo.co/api/v1/transactions/list/"
+GET "https://developer.slydo.co/api/v1/transactions/list/"
   -H "Authorization: $access_token"
 ```
 
@@ -72,43 +70,61 @@ curl "https://developer.slydo.co/api/v1/transactions/list/"
 ```json
 [
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
+    "id": "98564bac-5a94-4253-a442-1cf04beb1300",
+    "from_customer": "tobi.alade", 
+    "to_customer": "agege.puffpuff", 
+    "currency": "NGN", 
+    "amount": 1000,
+    "status": "Paid", 
+    "category": "Food", 
+    "slug": null, 
+    "notes": "Hot Puff Puff",
+    "short_description": "Hot and smoking Puff Puff",
+    "description": "Hot and smoking Puff Puff, with sugar and vanilla.", 
+    "settled_at": "2020-11-14T21:27:15.898206Z", 
+    "created_at": "2020-11-16T12:18:42.589594Z", 
+    "from_customer_avatar": "https://media.slydo.co/avatar/3ab17549781a43108d60ba56a4e5919b.jpg", 
+    "to_customer_avatar": "https://media.slydo.co/avatar/2aa4fdf91ca147cb824f3280ab2fa3b9.jpg"
   },
   {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+    "id": "98564bac-5a94-4253-a442-1cf04beb13d3",
+    "from_customer": "tobi.alade", 
+    "to_customer": "agege.puffpuff", 
+    "currency": "NGN", 
+    "amount": 500,
+    "status": "Paid", 
+    "category": "Food", 
+    "slug": null, 
+    "notes": "Hot Puff Puff",
+    "short_description": "Hot and smoking Puff Puff",
+    "description": "Hot and smoking Puff Puff, with sugar and vanilla.", 
+    "settled_at": "2020-12-14T21:27:15.898206Z", 
+    "created_at": "2020-12-16T12:18:42.589594Z", 
+    "from_customer_avatar": "https://media.slydo.co/avatar/3ab17549781a43108d60ba56a4e5919b.jpg", 
+    "to_customer_avatar": "https://media.slydo.co/avatar/2aa4fdf91ca147cb824f3280ab2fa3b9.jpg"
   }
 ]
 ```
 
-This endpoint retrieves all kittens.
-
 ### HTTP Request
 
-`GET https://developer.slydo.co/api/v1/transactions/`
+`GET https://developer.slydo.co/api/v1/transactions/list/`
 
 ### Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+all | true | If set to true, the result will include both sent and received transactions.
+received | false | If set to true, the result will only include received transactions.
+sent | true | If set to false, the result will only include sent transactions.
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
 
 ## Retrieve transaction
 
+Returns an individual transaction, fetched by its id.
+
 ```shell
-curl "https://developer.slydo.co/api/v1/transactions/<ID>/"
+GET "https://developer.slydo.co/api/v1/transactions/<ID>/"
   -H "Authorization: $access_token"
 ```
 
@@ -116,24 +132,24 @@ curl "https://developer.slydo.co/api/v1/transactions/<ID>/"
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "id": "98564bac-5a94-4253-a442-1cf04beb13d3",
+  "from_customer": "tobi.alade", 
+  "to_customer": "agege.puffpuff", 
+  "currency": "NGN", 
+  "amount": 1000,
+  "status": "Paid", 
+  "category": "Food", 
+  "slug": null, 
+  "notes": "Hot Puff Puff",
+  "short_description": "Hot and smoking Puff Puff",
+  "description": "Hot and smoking Puff Puff, with sugar and vanilla.", 
+  "settled_at": "2020-11-14T21:27:15.898206Z", 
+  "created_at": "2020-11-16T12:18:42.589594Z", 
+  "from_customer_avatar": "https://media.slydo.co/avatar/3ab17549781a43108d60ba56a4e5919b.jpg", 
+  "to_customer_avatar": "https://media.slydo.co/avatar/2aa4fdf91ca147cb824f3280ab2fa3b9.jpg"
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+`GET https://developer.slydo.co/transactions/<ID>/`

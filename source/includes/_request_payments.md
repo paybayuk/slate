@@ -1,8 +1,33 @@
-<aside class="notice">
-You must replace <code>$access_token</code> with your personal API key.
-</aside>
+# The Payment Request API
 
-# Request Payment
+
+Use the Payment Request API to build a payments integration that can handle complexity. 
+This API tracks a payment, from initial creation through the entire checkout process, 
+and triggers additional authentication steps as required for funds to be released by the payer/customer.
+
+Our Payment Request API powers your business for growth:
+
+* Support for Strong Customer Authentication (SCA)
+* Automatic authentication handling
+* No double charges
+* No idempotency key issues
+
+### Handling dynamic / real-time payments
+
+Use the Payment Request API together with the **Payment Request Tracking API**, **Transaction API** and **WebHooks**
+ to create intuitive and powerful payment flows, which are 3D like in nature.
+
+Building an integration with the Payment Request API involves two actions: **creating** and **confirming** a Payment Request. 
+Each Payment Request typically correlates with a single shopping cart or customer session in your application.
+
+Creating a Payment Request
+To get started, accept a payment.
+
+In this guide, you’ll create a Payment Request on the server and and track it's current status using the return url.
+The payment is confirmed on the client, and your server monitors **webhooks** or tracks the **Payment Request Tracking API** to 
+detect when the payment completes successfully or fails.
+
+When you create the Payment Request, you can specify options like the amount and currency:
 
 ## Make Payment Request
 

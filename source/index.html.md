@@ -9,12 +9,8 @@ toc_footers:
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - customers
-  - products
-  - services
-  - orders 
   - transactions
-  - request_payments
+  - request_payments  
   - webhooks
   - errors
 
@@ -22,6 +18,11 @@ search: false
 ---
 
 # Introduction
+✈️ *Slydo is a new kind of payment solution for Africa*
+
+[![](https://img.shields.io/github/release/ubclaunchpad/inertia.svg)](https://github.com/ubclaunchpad/inertia/releases/latest)
+[![](https://img.shields.io/docker/pulls/ubclaunchpad/inertia.svg?colorB=0db7ed)](https://cloud.docker.com/u/ubclaunchpad/repository/docker/ubclaunchpad/inertia/general)
+[![](https://img.shields.io/github/stars/ubclaunchpad/inertia.svg?style=social)](https://github.com/ubclaunchpad/inertia)
 > **API endpoint**
 
 ```
@@ -35,6 +36,13 @@ https://developer.slydo.co
 
 Welcome to the Slydo API! Our API is designed to be a predictable and intuitive interface for interacting with our 
 platform, which offers both a REST API and webhooks.
+
+
+<aside class="notice">
+This page is a <b>work in progress</b> - if anything seems incomplete or unclear,
+please feel free to
+<a href='https://github.com/ubclaunchpad/inertia/issues/new/choose'>open a ticket</a>!
+</aside>
 
 
 # Authentication
@@ -54,3 +62,5 @@ Slydo uses API keys to allow access to the API. You can register a new Slydo API
 Slydo expects for the API key to be included in all API requests to the server in a header that looks like the following:
 
 `Authorization: $access_token`
+
+<aside class="warning"><strong> Strong Customer Authentication</strong><br>Please store your API key securely and avoid displaying it publicly or sharing it.</aside>
