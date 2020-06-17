@@ -6,8 +6,12 @@ You must replace <code>$access_token</code> with your personal API key.
 
 ## Make Payment
 
+Transactions are movements of funds into or out of an account. Negative transactions represent debits (ie. *spending* money) and positive transactions represent credits (ie. *receiving* money).
+
+Most properties on transactions are self-explanatory. We'll eventually get around to documenting them all, but in the meantime let's discuss the most interesting/confusing ones:
+
 ```shell
-$ http POST "https://developer.slydo.co/api/v1/transactions/" \
+$ http POST "https://developer.slydo.co/api/v1/transactions/create/" \
   -H "Authorization: Token $access_token" \
    # ... JSON Payment data ...
 ```
@@ -59,7 +63,7 @@ Remember — a happy kitten is an authenticated kitten!
 ## List transactions
 
 ```shell
-curl "https://developer.slydo.co/api/v1/transactions/"
+curl "https://developer.slydo.co/api/v1/transactions/list/"
   -H "Authorization: $access_token"
 ```
 
@@ -104,7 +108,7 @@ Remember — a happy kitten is an authenticated kitten!
 ## Retrieve transaction
 
 ```shell
-curl "https://developer.slydo.co/api/v1/transactions//2"
+curl "https://developer.slydo.co/api/v1/transactions/<ID>/"
   -H "Authorization: $access_token"
 ```
 
@@ -133,32 +137,3 @@ This endpoint retrieves a specific kitten.
 Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to retrieve
-
-## Delete transaction
-
-```shell
-curl "https://developer.slydo.co/api/v1/transactions//2"
-  -X DELETE
-  -H "Authorization: $access_token"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE https://developer.slydo.co/api/v1/transactions/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
