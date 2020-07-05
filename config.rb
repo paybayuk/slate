@@ -28,6 +28,7 @@ ready do
 end
 
 activate :sprockets
+activate :livereload, apply_js_live: false
 
 activate :autoprefixer do |config|
   config.browsers = ['last 2 version', 'Firefox ESR']

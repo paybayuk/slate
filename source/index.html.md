@@ -5,8 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://slydo.co/api-docs'>Slido.co</a>
+  - <a href='https://slydo.co/'>Sign Up for a Developer Key</a>
 
 includes:
   - transactions
