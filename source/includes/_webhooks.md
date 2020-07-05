@@ -72,29 +72,20 @@ You can also programmatically create webhook endpoints. As with the form in the 
 you can enter any URL as the destination for events and which event types to subscribe to. 
 
 
-```shell
-$ http POST "https://developer.slydo.co/api/v1/webhook/" \
-  -H "Authorization: Token $access_token" \
-   # ... JSON Payment data ...
+```shell script
+http -f POST "https://api.slydo.co/v1/webhook/" \
+  event=payment-received \
+  url=https://example.com/webhook/process-payment-received
 ```
 
-
-```json
-{
-    "amount": "1000",
-    "currency": "NGN",
-    "description": "Weekend shopping at my local shopping center",
-    "short description": "Weekly shopping",
-    "note": "Weekly Shopping",
-    "category": "Shopping"
-  }
-```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "98564bac-5a94-4253-a442-1cf04beb13d3"
+    "id": "payment-received",
+    "event": "payment-received",
+    "url": "https://example.com/webhook/process-payment-received"
   }
 ```
 
